@@ -533,6 +533,134 @@ class IndexController extends Controller
 
     }
 
+    public function myres()
+    {
+        $name = Session::get();
+        $unit = Unit::get();
+        $course = Course::get();
+        $test = Test::get();
+        $count = Registration::get();
+        $res = Result::where('regNo','=',Auth::user()->regNo)->get();
+        return view('results')->with('sessions', $name)->with('results', $res)->with('tests', $test)->with('units', $unit)->with('courses', $course);
+    }
+
+    protected function myResults() {
+      $rules = array(
+              'semester' => 'required|max:100',
+              'session' => 'required|max:100',
+              'year' => 'required|max:100',
+              'year_of_study' => 'required|max:100',
+              'academic_year' => 'required|max:100',
+              'test' => 'required|max:100',
+          );
+
+          $validator = Validator::make(Input::all(), $rules);
+
+    // check if the validator failed -----------------------
+    if ($validator->fails()) {
+
+        // get the error messages from the validator
+        $messages = $validator->messages();
+
+        // redirect our user back to the form with the errors from the validator
+        return Redirect::to('/myresults')
+            ->withErrors($validator);
+
+    } else {
+        // validation successful ---------------------------
+
+        // report has passed all tests!
+        // let him enter the database
+
+        // create the data for report
+        //$count = 0;
+        $yr = Input::get('year');
+        $crs = Input::get('code');
+        $sem = Input::get('semester');
+        $acd_yr = Input::get('academic_year');
+        $yr_std = Input::get('year_of_study');
+        $sess = Input::get('session');
+        $regno = Input::get('regNo');
+        $test = Input::get('test');
+
+        $unit = Unit::get();
+        $name = Session::get();
+        $unit = Unit::get();
+        $course = Course::get();
+        $tests = Test::get();
+        $results = Result::where('semester','=',$sem)->where('test','=',$test)->where('year','=',$yr)->where('session','=',$sess)->where('academic_year','=',$acd_yr)->where('regNo','=',$regno)->get();
+
+              return view('results')->with('sessions', $name)->with('results', $results)->with('tests', $tests)->with('units', $unit)->with('courses', $course);
+
+       }
+
+    }
+
+
+    public function viewRes()
+    {
+        $name = Session::get();
+        $unit = Unit::get();
+        $course = Course::get();
+        $test = Test::get();
+        $count = Registration::get();
+        $res = Result::get();
+        return view('results')->with('sessions', $name)->with('results', $res)->with('tests', $test)->with('units', $unit)->with('courses', $course);
+    }
+
+    protected function loadRes() {
+      $rules = array(
+              'semester' => 'required|max:100',
+              'session' => 'required|max:100',
+              'year' => 'required|max:100',
+              'year_of_study' => 'required|max:100',
+              'academic_year' => 'required|max:100',
+              'course' => 'required|max:100',
+          );
+
+          $validator = Validator::make(Input::all(), $rules);
+
+    // check if the validator failed -----------------------
+    if ($validator->fails()) {
+
+        // get the error messages from the validator
+        $messages = $validator->messages();
+
+        // redirect our user back to the form with the errors from the validator
+        return Redirect::to('/viewresults')
+            ->withErrors($validator);
+
+    } else {
+        // validation successful ---------------------------
+
+        // report has passed all tests!
+        // let him enter the database
+
+        // create the data for report
+        //$count = 0;
+        $yr = Input::get('year');
+        $crs = Input::get('course');
+        $sem = Input::get('semester');
+        $acd_yr = Input::get('academic_year');
+        $yr_std = Input::get('year_of_study');
+        $sess = Input::get('session');
+        $regno = Input::get('regNo');
+        $test = Input::get('test');
+
+        $unit = Unit::get();
+        $name = Session::get();
+        $unit = Unit::get();
+        $course = Course::get();
+        $tests = Test::get();
+        $results = Result::where('semester','=',$sem)->where('year','=',$yr)->where('session','=',$sess)->where('academic_year','=',$acd_yr)->where('course','=',$crs)->get();
+
+              return view('results')->with('sessions', $name)->with('results', $results)->with('tests', $tests)->with('units', $unit)->with('courses', $course);
+
+       }
+
+    }
+
+
     public function regunits()
     {
         $name = Session::get();
@@ -572,20 +700,12 @@ class IndexController extends Controller
 
         // create the data for report
         //$count = 0;
-        $yr = Input::get('year');
-        $crs = Input::get('code');
-        $sem = Input::get('semester');
-        $acd_yr = Input::get('academic_year');
-        $yr_std = Input::get('year_of_study');
-        $sess = Input::get('session');
-        $regno = Input::get('regNo');
+        $sess = Session::get();
+        $unit = Unit::get();
+        $course = Course::get();
         $count = Registration::where('semester','=',$sem)->where('year','=',$yr)->where('session','=',$sess)->where('regNo','=',$regno)->count();
 
-        $name = Module::where('year','=',$yr)->where('course','=',$crs)->where('semester','=',$sem)->get();
-
-
-
-              return view('unitsregestration')->with('count', $count)->with('year_of_study', $yr_std)->with('units', $name)->with('sem', $sem)->with('sess', $sess)->with('yr', $yr)->with('acd_yr', $acd_yr)->with('yr_std', $yr_std);
+      return view('results')->with('results', $count)->with('units', $unit)->with('sessions', $sess)->with('courses', $course);
 
        }
 

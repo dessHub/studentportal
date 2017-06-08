@@ -9,7 +9,7 @@
           <h3>Quick Links</h3>
           <ul style="color:blue;">
             @if (Auth::guest())
-            <li><a href="{{ url('/register')}}" ><span  style="color:blue;">Register As Lecturer</span></a></li>
+            <li><a href="{{ url('/psignup')}}" ><span  style="color:blue;">Register As A Parent</span></a></li>
             <li><a href="{{ url('/login')}}"><span  style="color:blue;">Login</span> </a></li>
             @else
 
@@ -37,7 +37,7 @@
       </div>
       <div class="section">
         <h3><span>Welcome to the Uber Campus Staff Portal. Sign Up with your Staff Credentials.</span></h3>
-        <p>With lecturers account , you can be able to asign units, update student results, create new courses , create new units and set sessions.</p>
+        <p>With Parent account , you can be able to view your student results and receive constant updates about your son/daugters progress at school.</p>
         <p>If you're having problems navigating the website portal, then don't hesitate to ask for help on the School IT Desk</a>.</p>
         <div class="row">
             <div class="col-md-12">

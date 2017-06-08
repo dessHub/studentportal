@@ -8,7 +8,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Select Class</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/loadres') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/viewresults') }}">
                         {{ csrf_field() }}
                         <div class="col-md-12">
                        <div class="col-md-3">
@@ -119,7 +119,7 @@
 
                                 <div class="col-md-12">
                                      <select class="form-control" id="test" name="test" required="true" value="{{ old('test') }}" style="background-color : inherit">
-                                         <option  value="">Select Test</option>
+                                         <option  value="">Select test</option>
                                          @foreach($tests as $key)
                                          <option  value="{{$key->name}}">{{$key->name}}</option>
                                          @endforeach
@@ -133,7 +133,7 @@
                         <div class="form-group">
                             <div class="col-md-12 " style="padding-top:25px;">
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-refresh"></i> Class
+                                    <i class="fa fa-btn fa-search"></i> Results
                                 </button>
                             </div>
                         </div>
@@ -146,7 +146,7 @@
           <div class="panel panel-default">
               <div class="panel-heading">Units Asignment Portal</div>
               <div class="panel-body">
-                  <form class="form-horizontal" role="form" method="POST" action="{{ url('/loadunits') }}">
+                  <form class="form-horizontal" role="form" method="POST" action="{{ url('/myresults') }}">
                       {{ csrf_field() }}
                     <div class="col-md-12">
 
@@ -229,7 +229,7 @@
                     </div>
                   </div>
 
-                   <div class="col-md-2">
+                   <div class="col-md-1">
                     <div class="form-group{{ $errors->has('year') ? ' has-error' : '' }}">
                         <label for="year" class="col-md-12 control-label">Year:</label>
 
@@ -282,11 +282,27 @@
                           </div>
                         </div>
 
-                    <div class="col-md-2">
+                       <div class="col-md-2">
+                        <div class="form-group{{ $errors->has('test') ? ' has-error' : '' }}">
+                            <label for="test" class="col-md-12 control-label">Test:</label>
+
+                            <div class="col-md-12">
+                                 <select class="form-control" id="test" name="test" required="true" value="{{ old('test') }}" style="background-color : inherit">
+                                     <option  value="">Select Session</option>
+                                     @foreach($tests as $key)
+                                     <option  value="{{$key->name}}">{{$key->name}}</option>
+                                     @endforeach
+
+                                 </select>
+                            </div>
+                        </div>
+                      </div>
+
+                    <div class="col-md-1">
                       <div class="form-group">
                           <div class="col-md-12 " style="padding-top:25px;">
                               <button type="submit" class="btn btn-primary">
-                                  <i class="fa fa-btn fa-refresh"></i>Load Class
+                                  <i class="fa fa-btn fa-search"></i>Results
                               </button>
                           </div>
                       </div>
@@ -300,6 +316,42 @@
 
         @endif
 
+        </div>
+    </div>
+</div>
+
+<div class="container"style="">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"></div>
+                <div class="panel-body">
+                  <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+
+                        <thead>
+                            <th>Registration</th>
+                            <th>Test</th>
+                            <th>Unit</th>
+                            <th>Marks</th>
+
+                        </thead>
+                        <tbody>
+                          @foreach($results as $key)
+                            <tr>
+                              <td>{{ $key->regNo}}</td>
+                              <td>{{ $key->test }}</td>
+                              <td>{{ $key->unit }}</td>
+                              <td>{{ $key->marks }}</td>
+
+                            </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

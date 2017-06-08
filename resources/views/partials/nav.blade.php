@@ -3,17 +3,16 @@
     <li class="first selected"><a href="{{ url('/') }}">Home</a></li>
     <li><a href="{{ url('/forstudent') }}">Student</a></li>
       <li><a href="{{ url('/admin') }}">Admin</a></li>
+        <li><a href="{{ url('/forparent') }}">Parent</a></li>
         <!-- Authentication Links -->
         @if (Auth::guest())
             <li><a href="{{ url('/login') }}">Login</a></li>
-            <li><a href="{{ url('/register') }}">Register</a></li>
 
         @else
           @if (Auth::user()->role === 'Lecturer')
             <li><a href="{{ url('/asignunits') }}">Asign Units</a></li>
-            <li><a href="{{ url('/session') }}">Session</a></li>
-            <li><a href="{{ url('/test') }}">Test</a></li>
-            <li><a href="{{ url('/getres') }}">Results</a></li>
+            <li><a href="{{ url('/viewresults') }}">View Results</a></li>
+            <li><a href="{{ url('/getres') }}">Update Results</a></li>
           @elseif (Auth::user()->role === 'Student')
           <li><a href="{{ url('/regunits') }}">Register Units</a></li>
           <li><a href="{{ url('/myresults') }}">View Results</a></li>

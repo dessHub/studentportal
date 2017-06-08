@@ -31,20 +31,29 @@ $this->get('/', function () {
 });
 
 $this->get('/signup', function () {
-
   $name = Department::get();
   $course = Course::get();
   $cat = Category::get();
-
   return view('auth/signup')->with('departments', $name)->with('courses', $course)->with('cats', $cat);
 });
 
 $this->get('/forstudent', function () {
-
   $name = Department::get();
   $course = Course::get();
-
   return view('studentportal')->with('departments', $name)->with('courses', $course);
+});
+
+$this->get('/forparent', function () {
+  $name = Department::get();
+  $course = Course::get();
+  return view('parent')->with('departments', $name)->with('courses', $course);
+});
+
+$this->get('/psignup', function () {
+  $name = Department::get();
+  $course = Course::get();
+  $cat = Category::get();
+  return view('auth/psignup')->with('departments', $name)->with('courses', $course)->with('cats', $cat);
 });
 
 
@@ -82,3 +91,8 @@ $this->post('saveunits', 'IndexController@saveUnits');
 $this->get('getres', 'IndexController@getResForm');
 $this->post('loadres', 'IndexController@loadResForm');
 $this->post('saveres', 'IndexController@saveRes');
+
+$this->get('viewresults', 'IndexController@viewRes');
+$this->post('viewresults', 'IndexController@loadRes');
+$this->get('myresults', 'IndexController@myres');
+$this->post('myresults', 'IndexController@myResults');

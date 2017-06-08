@@ -103,19 +103,6 @@
                             </div>
                         </div>
 
-                      <div class="form-group{{ $errors->has('notification') ? ' has-error' : '' }}">
-                          <label for="notification" class="col-md-12 control-label">Mode of Notification:</label>
-
-                          <div class="col-md-12">
-                               <select class="form-control" id="notification" name="notification" required="true" value="{{ old('notification') }}" style="background-color : inherit">
-                                   <option  value="">Select Notifiaction</option>
-                                   <option  value="Text">Text</option>
-                                    <option  value="Email">Email</option>
-
-                               </select>
-                          </div>
-                      </div>
-
                           </div>
 
                           <div class="col-md-6">
@@ -192,15 +179,15 @@
                               </div>
                           </div>
 
+                          </div>
+
                         <div class="form-group">
-                            <div class="col-md-6 " style="padding-top:30px;">
+                            <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-user"></i> Register
                                 </button>
                             </div>
                         </div>
-
-                          </div>
                     </form>
                 </div>
             </div>

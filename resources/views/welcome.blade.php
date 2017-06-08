@@ -26,7 +26,7 @@
 <div id="adbox">
   <div class="body">
     <div class="images">
-      <img src="./images/discussing2.jpg" alt="Img" class="" />
+      <img src="./public/images/discussing2.jpg" alt="Img" class="" />
       <img src="./public/images/shake-hands.jpg" alt="Img" height="144" width="230px" />
       <img src="./public/images/professionals.jpg" alt="Img" height="135" width="230px" class="last" />
     </div>
