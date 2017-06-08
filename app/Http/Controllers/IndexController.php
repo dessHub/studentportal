@@ -11,6 +11,7 @@ use App\Unit;
 use App\Test;
 use App\Module;
 use App\Result;
+use App\Asignment;
 use App\Registration;
 use Validator;
 use Auth;
@@ -320,6 +321,135 @@ class IndexController extends Controller
          }
 
     }
+
+    public function getAsignments()
+    {
+        $name = Session::get();
+        $unit = Unit::get();
+        $course = Course::get();
+        $asigns = Asignment::where('regNo','=', Auth::user()->regNo)->get();
+        return view('asignments')->with('sessions', $name)->with('units', $unit)->with('courses', $course)->with('asignments', $asigns);
+    }
+
+    public function postAsignment() {
+      $rules = array(
+              'semester' => 'required|max:100',
+              'session' => 'required|max:100',
+              'year' => 'required|max:100',
+              'academic_year' => 'required|max:100',
+              'course' => 'required|max:100',
+              'code' => 'required|max:100',
+              'asignment' => 'required|max:500',
+          );
+
+          $validator = Validator::make(Input::all(), $rules);
+
+    // check if the validator failed -----------------------
+    if ($validator->fails()) {
+
+        // get the error messages from the validator
+        $messages = $validator->messages();
+
+        // redirect our user back to the form with the errors from the validator
+        return Redirect::to('/asignments')
+            ->withErrors($validator);
+
+    } else {
+        // validation successful ---------------------------
+
+        // report has passed all tests!
+        // let him enter the database
+
+        // create the data for report
+        //$count = 0;
+
+        $asignment = new Asignment;
+        $asignment->semester     = Input::get('semester');
+        $asignment->session     = Input::get('session');
+        $asignment->course     = Input::get('course');
+        $asignment->unit     = Input::get('code');
+        $asignment->year     = Input::get('year');
+        $asignment->academic_year     = Input::get('academic_year');
+        $asignment->year_of_study     = Input::get('year_of_study');
+        $asignment->regNo     = Auth::user()->regNo;
+        $asignment->asignment     = Input::get('asignment');
+
+        // save report
+        $asignment->save();
+
+        // redirect ----------------------------------------
+        // redirect our user back to the form so they can do it all over again
+
+            return Redirect::to('/asignments');
+
+       }
+
+    }
+
+    public function viewAsignments()
+    {
+        $name = Session::get();
+        $unit = Unit::get();
+        $course = Course::get();
+        $asigns = Asignment::where('course','=', Auth::user()->code)->get();
+        return view('asignments')->with('sessions', $name)->with('units', $unit)->with('courses', $course)->with('asignments', $asigns);
+    }
+
+    public function viewAsignment() {
+      $rules = array(
+              'semester' => 'required|max:100',
+              'session' => 'required|max:100',
+              'year' => 'required|max:100',
+              'academic_year' => 'required|max:100',
+              'course' => 'required|max:100',
+              'code' => 'required|max:100',
+              'asignment' => 'required|max:500',
+          );
+
+          $validator = Validator::make(Input::all(), $rules);
+
+    // check if the validator failed -----------------------
+    if ($validator->fails()) {
+
+        // get the error messages from the validator
+        $messages = $validator->messages();
+
+        // redirect our user back to the form with the errors from the validator
+        return Redirect::to('/asignments')
+            ->withErrors($validator);
+
+    } else {
+        // validation successful ---------------------------
+
+        // report has passed all tests!
+        // let him enter the database
+
+        // create the data for report
+        //$count = 0;
+        $semester     = Input::get('semester');
+        $session     = Input::get('session');
+        $course     = Input::get('course');
+        $unit     = Input::get('code');
+        $year     = Input::get('year');
+        $academic_year     = Input::get('academic_year');
+        $year_of_study     = Input::get('year_of_study');
+        $regNo     = Auth::user()->regNo;
+            $sess = Session::get();
+            $name = Unit::get();
+            $crs = Course::get();
+
+        // save report
+        $asigns = Asignment::where('course','=', Auth::user()->code)->where('unit','=', $unit)->where('year_of_study','=', $year_of_study)->where('semester','=', $semester)->where('session','=', $session)->where('year','=', $year)->get();
+
+        // redirect ----------------------------------------
+        // redirect our user back to the form so they can do it all over again
+
+            return view('asignments')->with('sessions', $sess)->with('units', $name)->with('courses', $crs)->with('asignments', $asigns);
+
+       }
+
+    }
+
 
     public function getUnits()
     {

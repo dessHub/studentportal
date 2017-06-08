@@ -96,3 +96,8 @@ $this->get('viewresults', 'IndexController@viewRes');
 $this->post('viewresults', 'IndexController@loadRes');
 $this->get('myresults', 'IndexController@myres');
 $this->post('myresults', 'IndexController@myResults');
+
+$this->get('asignments', 'IndexController@getAsignments');
+$this->post('asignments', 'IndexController@postAsignment');
+$this->get('viewasignments', 'IndexController@viewAsignments');
+$this->post('viewasignments', 'IndexController@viewAsignment');
