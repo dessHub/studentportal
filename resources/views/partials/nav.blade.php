@@ -10,14 +10,9 @@
 
         @else
           @if (Auth::user()->role === 'Lecturer')
-            <li><a href="{{ url('/asignunits') }}">Asign Units</a></li>
             <li><a href="{{ url('/viewresults') }}">View Results</a></li>
-            <li><a href="{{ url('/getres') }}">Update Results</a></li>
-            <li><a href="{{ url('/asignments') }}">Asignments</a></li>
           @elseif (Auth::user()->role === 'Student')
-          <li><a href="{{ url('/regunits') }}">Register Units</a></li>
           <li><a href="{{ url('/myresults') }}">View Results</a></li>
-          <li><a href="{{ url('/viewasignments') }}">Asignments</a></li>
 
           @endif
               <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>

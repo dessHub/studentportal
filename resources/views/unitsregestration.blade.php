@@ -164,7 +164,7 @@
                           @foreach($units as $key)
                             <tr>
                               <td>{{ $key->code}}</td>
-                              <td>{{ $key->course }}</td>
+                              <td>{{ $key->name }}</td>
 
                             </tr>
                             @endforeach

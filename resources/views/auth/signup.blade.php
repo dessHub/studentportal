@@ -135,6 +135,20 @@
                               </div>
                           </div>
 
+                          <div class="form-group{{ $errors->has('prnt') ? ' has-error' : '' }}">
+                              <label for="prnt" class="col-md-12 control-label">Parent ID No:</label>
+
+                              <div class="col-md-12">
+                                  <input id="prnt" type="text" class="form-control" name="prnt" value="{{ old('prnt') }}">
+
+                                  @if ($errors->has('prnt'))
+                                      <span class="help-block">
+                                          <strong>{{ $errors->first('prnt') }}</strong>
+                                      </span>
+                                  @endif
+                              </div>
+                          </div>
+
                           <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                               <label for="email" class="col-md-12 control-label">E-Mail Address</label>
 

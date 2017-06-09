@@ -12,7 +12,7 @@ class Registration extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'semester', 'session', 'regNo', 'course', 'year', 'academic_year', 'year_of_study'
+        'semester', 'session', 'regNo', 'phoneNo', 'course', 'year', 'academic_year', 'year_of_study'
     ];
 
     /**

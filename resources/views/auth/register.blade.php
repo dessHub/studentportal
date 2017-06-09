@@ -114,29 +114,47 @@
                             </div>
                         </div>
 
-                          <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                              <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                      <div class="form-group{{ $errors->has('notification') ? ' has-error' : '' }}">
+                          <label for="notification" class="col-md-12 control-label">Mode of Notification:</label>
 
-                              <div class="col-md-9">
-                                  <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
+                          <div class="col-md-12">
+                               <select class="form-control" id="notification" name="notification" required="true" value="{{ old('notification') }}" style="background-color : inherit">
+                                   <option  value="">Select Notifiaction</option>
+                                   <option  value="Text">Text</option>
+                                    <option  value="Email">Email</option>
 
-                                  @if ($errors->has('password_confirmation'))
-                                      <span class="help-block">
-                                          <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                      </span>
-                                  @endif
-                              </div>
+                               </select>
+                          </div>
+                      </div>
+
                           </div>
 
-                          </div>
+                 <div class="col-md-4">
 
+                     <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                         <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+
+                         <div class="col-md-9">
+                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
+
+                             @if ($errors->has('password_confirmation'))
+                                 <span class="help-block">
+                                     <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                 </span>
+                             @endif
+                         </div>
+                     </div>
+
+                 </div>
+
+                 <div class="col-md-6">
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                            <div class="col-md-6 col-md-offset-4" style="padding-top:30px;">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-user"></i> Register
                                 </button>
                             </div>
-                        </div>
+                        </div></div>
                     </form>
                 </div>
             </div>

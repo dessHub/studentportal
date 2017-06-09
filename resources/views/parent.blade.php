@@ -12,14 +12,11 @@
             <li><a href="{{ url('/psignup')}}" ><span  style="color:blue;">Register As A Parent</span></a></li>
             <li><a href="{{ url('/login')}}"><span  style="color:blue;">Login</span> </a></li>
             @else
+              @if (Auth::user()->role === 'Parent')
 
-            <li><a href="{{ url('/dept')}}" ><span  style="color:blue;">Departments</span></a></li>
-            <li><a href="{{ url('/courses')}}"><span  style="color:blue;">Courses</span> </a></li>
-            <li><a href="{{ url('/units')}}"><span  style="color:blue;">Units</span> </a></li>
-            <li><a href="{{ url('/session') }}">Session</a></li>
-            <li><a href="{{ url('/test') }}">Test</a></li>
-            <li><a href="{{ url('/cat')}}"><span  style="color:blue;">Study Categories</span></a></li>
-            <li><a href="{{ url('/')}}"><span  style="color:blue;">About Us</span></a></li>
+                  <li><a href="{{ url('/viewStdResults')}}"><span  style="color:blue;">View Results</span> </a></li>
+
+              @endif
 
                <li><a href="{{ url('/logout')}}"><span  style="color:blue;">Logout</span> </a></li>
 

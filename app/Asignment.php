@@ -12,7 +12,7 @@ class Asignment extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'semester', 'session', 'regNo', 'course', 'year', 'academic_year', 'year_of_study', 'unit',
+        'semester', 'session', 'regNo', 'course', 'year', 'academic_year', 'year_of_study', 'unit', 'lecturer'
     ];
 
     /**

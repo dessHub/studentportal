@@ -55,10 +55,6 @@ class AuthController extends Controller
             'password' => 'required|min:6|confirmed',
             'regNo' => 'required|max:255|unique:users',
             'phoneNo' => 'required|min:12|max:13|unique:users',
-            'role' => 'required|max:255',
-            'code' => 'max:255',
-            'dept' => 'required|max:255',
-            'cat' => 'max:255',
             'gender' => 'required|max:13',
         ]);
     }
@@ -71,6 +67,7 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        if($data['role'] === "Student"){
       $course = Course::where('code','=',$data['code'])->get();
       $crs = "";
       foreach($course as $key){
@@ -80,14 +77,43 @@ class AuthController extends Controller
             'name' => $data['name'],
             'regNo' => $data['regNo'],
             'phoneNo' => $data['phoneNo'],
+            'guardian' => $data['prnt'],
             'email' => $data['email'],
             'role' => $data['role'],
             'course' => $crs,
             'code' => $data['code'],
             'department' => $data['dept'],
             'category' => $data['cat'],
+            'notification' => $data['notification'],
+            'gender' => $data['gender'],
+            'password' => bcrypt($data['password']),
+        ]);
+    }elseif ($data['role'] === "Lecturer") {
+        return User::create([
+            'name' => $data['name'],
+            'regNo' => $data['regNo'],
+            'phoneNo' => $data['phoneNo'],
+            'email' => $data['email'],
+            'role' => $data['role'],
+            'department' => $data['dept'],
+            'notification' => $data['notification'],
+            'gender' => $data['gender'],
+            'password' => bcrypt($data['password']),
+        ]);
+    }else {
+        return User::create([
+            'name' => $data['name'],
+            'regNo' => $data['regNo'],
+            'guardian' => $data['std'],
+            'code' => $data['code'],
+            'phoneNo' => $data['phoneNo'],
+            'email' => $data['email'],
+            'role' => "Parent",
+            'notification' => $data['notification'],
             'gender' => $data['gender'],
             'password' => bcrypt($data['password']),
         ]);
     }
+}
+
 }

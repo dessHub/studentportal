@@ -281,7 +281,7 @@
                       <div class="form-group">
                           <div class="col-md-12 " style="padding-top:25px;">
                               <button type="submit" class="btn btn-primary">
-                                  <i class="fa fa-btn fa-user"></i> Save
+                                  <i class="fa fa-btn fa-search"></i> Asigments
                               </button>
                           </div>
                       </div>
@@ -311,6 +311,7 @@
                             <th>Class</th>
                             <th>year</th>
                             <th>Asignment</th>
+                            <th>Lecturer</th>
 
                         </thead>
                         <tbody>
@@ -320,6 +321,7 @@
                               <td>{{ $key->course }}</td>
                               <td>{{ $key->year_of_study }}</td>
                               <td>{{ $key->asignment}}</td>
+                              <td>{{ $key->lecturer}}</td>
 
                             </tr>
                             @endforeach

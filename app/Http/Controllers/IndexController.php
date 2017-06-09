@@ -19,6 +19,8 @@ use App\Http\Requests;
 use Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Mail;
+use SMSProvider;
 
 class IndexController extends Controller
 {
@@ -372,10 +374,39 @@ class IndexController extends Controller
         $asignment->academic_year     = Input::get('academic_year');
         $asignment->year_of_study     = Input::get('year_of_study');
         $asignment->regNo     = Auth::user()->regNo;
+        $asignment->lecturer     = Auth::user()->name;
         $asignment->asignment     = Input::get('asignment');
 
         // save report
         $asignment->save();
+        $lec = Auth::user()->name;
+        $u = Input::get('code');
+        $text = "Check $u asignments by $lec on the portal.";
+
+        $stds = Registration::where('course','=',Input::get('course'))->where('semester','=',Input::get('semester'))->where('year_of_study','=',Input::get('year_of_study'))->where('academic_year','=',Input::get('academic_year'))->get();
+
+        foreach($stds as $key) {
+
+          $title = "asignments";
+          $content = Input::get('asignment');
+
+
+          Mail::send('auth/emails/send', ['title' => $title, 'content' => $content], function ($message)
+          {
+
+              $message->from('desshub95@gmail.com', 'Desmond');
+
+              $message->to('deskip95@gmail.com');
+
+          });
+
+          //return response()->json(['message' => 'Request completed']);
+
+
+          SMSProvider::sendMessage($key->phoneNo, $text);
+        }
+
+
 
         // redirect ----------------------------------------
         // redirect our user back to the form so they can do it all over again
@@ -791,6 +822,72 @@ class IndexController extends Controller
     }
 
 
+    public function viewStdRes()
+    {
+        $name = Session::get();
+        $unit = Unit::get();
+        $course = Course::get();
+        $test = Test::get();
+        $count = Registration::get();
+        $res = Result::where('regNo','=',Auth::user()->guardian)->get();
+        $user = User::where('regNo','=',Auth::user()->guardian)->get();
+        return view('results')->with('users', $user)->with('sessions', $name)->with('results', $res)->with('tests', $test)->with('units', $unit)->with('courses', $course);
+    }
+
+    protected function StdRes() {
+      $rules = array(
+              'semester' => 'required|max:100',
+              'session' => 'required|max:100',
+              'year' => 'required|max:100',
+              'year_of_study' => 'required|max:100',
+              'academic_year' => 'required|max:100',
+              'test' => 'required|max:100',
+          );
+
+          $validator = Validator::make(Input::all(), $rules);
+
+    // check if the validator failed -----------------------
+    if ($validator->fails()) {
+
+        // get the error messages from the validator
+        $messages = $validator->messages();
+
+        // redirect our user back to the form with the errors from the validator
+        return Redirect::to('/viewStdResults')
+            ->withErrors($validator);
+
+    } else {
+        // validation successful ---------------------------
+
+        // report has passed all tests!
+        // let him enter the database
+
+        // create the data for report
+        //$count = 0;
+        $yr = Input::get('year');
+        $crs = Input::get('code');
+        $sem = Input::get('semester');
+        $acd_yr = Input::get('academic_year');
+        $yr_std = Input::get('year_of_study');
+        $sess = Input::get('session');
+        $regno = Input::get('regNo');
+        $test = Input::get('test');
+
+        $unit = Unit::get();
+        $name = Session::get();
+        $unit = Unit::get();
+        $course = Course::get();
+        $tests = Test::get();
+        $user = User::where('regNo','=',Auth::user()->guardian)->get();
+        $results = Result::where('semester','=',$sem)->where('test','=',$test)->where('year','=',$yr)->where('session','=',$sess)->where('academic_year','=',$acd_yr)->where('regNo','=',$regno)->get();
+
+              return view('results')->with('users', $user)->with('sessions', $name)->with('results', $results)->with('tests', $tests)->with('units', $unit)->with('courses', $course);
+
+       }
+
+    }
+
+
     public function regunits()
     {
         $name = Session::get();
@@ -830,12 +927,19 @@ class IndexController extends Controller
 
         // create the data for report
         //$count = 0;
-        $sess = Session::get();
+        $yr = Input::get('year');
+        $crs = Input::get('code');
+        $sem = Input::get('semester');
+        $acd_yr = Input::get('academic_year');
+        $yr_std = Input::get('year_of_study');
+        $sess = Input::get('session');
+        $regno = Input::get('regNo');
+        $session = Session::get();
         $unit = Unit::get();
         $course = Course::get();
         $count = Registration::where('semester','=',$sem)->where('year','=',$yr)->where('session','=',$sess)->where('regNo','=',$regno)->count();
 
-      return view('results')->with('results', $count)->with('units', $unit)->with('sessions', $sess)->with('courses', $course);
+      return view('unitsregestration')->with('results', $count)->with('sem', $sem)->with('sess', $sess)->with('yr', $yr)->with('acd_yr', $acd_yr)->with('yr_std', $yr_std)->with('units', $unit)->with('sessions', $session)->with('courses', $course);
 
        }
 
@@ -878,6 +982,7 @@ class IndexController extends Controller
         $yr_std = Input::get('year_of_study');
         $sess = Input::get('session');
         $regno = Input::get('regNo');
+        $phone = Auth::user()->phoneNo;
         $count = Registration::where('semester','=',$sem)->where('year','=',$yr)->where('session','=',$sess)->where('regNo','=',$regno)->count();
 
         if($count > 0){
@@ -891,6 +996,7 @@ class IndexController extends Controller
         $registration->course     = $crs;
         $registration->academic_year     = $acd_yr;
         $registration->regNo     = $regno;
+        $registration->phoneNo     = $phone;
 
         // save report
         $registration->save();

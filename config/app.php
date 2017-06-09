@@ -146,7 +146,7 @@ return [
         Illuminate\Session\SessionServiceProvider::class,
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
-        Illuminate\View\ViewServiceProvider::class,
+        Illuminate\View\ViewServiceProvider::class,FreddieDfre\AfricasTalkingLaravel5\AfricasTalkingLaravel5ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -201,6 +201,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'SMSProvider' =>FreddieDfre\AfricasTalkingLaravel5\AfricasTalkingLaravel5Facade::class,
 
     ],
 

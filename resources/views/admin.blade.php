@@ -12,15 +12,20 @@
             <li><a href="{{ url('/register')}}" ><span  style="color:blue;">Register As Lecturer</span></a></li>
             <li><a href="{{ url('/login')}}"><span  style="color:blue;">Login</span> </a></li>
             @else
+              @if (Auth::user()->role === 'Lecturer')
 
             <li><a href="{{ url('/dept')}}" ><span  style="color:blue;">Departments</span></a></li>
             <li><a href="{{ url('/courses')}}"><span  style="color:blue;">Courses</span> </a></li>
             <li><a href="{{ url('/units')}}"><span  style="color:blue;">Units</span> </a></li>
+            <li><a href="{{ url('/asignunits') }}">Asign Units</a></li>
+            <li><a href="{{ url('/getres') }}">Update Results</a></li>
+            <li><a href="{{ url('/asignments') }}">Asignments</a></li>
             <li><a href="{{ url('/session') }}">Session</a></li>
             <li><a href="{{ url('/test') }}">Test</a></li>
             <li><a href="{{ url('/cat')}}"><span  style="color:blue;">Study Categories</span></a></li>
             <li><a href="{{ url('/')}}"><span  style="color:blue;">About Us</span></a></li>
-
+                @endif
+ 
                <li><a href="{{ url('/logout')}}"><span  style="color:blue;">Logout</span> </a></li>
 
             @endif
