@@ -29,7 +29,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/red';
 
     /**
      * Create a new authentication controller instance.
@@ -88,7 +88,7 @@ class AuthController extends Controller
             'gender' => $data['gender'],
             'password' => bcrypt($data['password']),
         ]);
-    }elseif ($data['role'] === "Lecturer") {
+    }elseif ($data['role'] === "Staff") {
         return User::create([
             'name' => $data['name'],
             'regNo' => $data['regNo'],

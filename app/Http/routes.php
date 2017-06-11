@@ -27,7 +27,16 @@ use Illuminate\Support\Facades\Redirect;
 */
 
 $this->get('/', function () {
+
     return view('welcome');
+});
+
+$this->get('/red', function () {
+   if(Auth::user()->role === 'Staff'){
+     return view('200');
+   }else {
+     return Redirect::to('/');
+   }
 });
 
 $this->get('/signup', function () {
@@ -68,6 +77,8 @@ $this->auth();
 
 $this->get('/home', 'HomeController@index');
 
+$this->get('lecturers', 'IndexController@lecturers');
+$this->post('role', 'IndexController@roles');
 $this->get('dept', 'IndexController@dept');
 $this->post('dept', 'IndexController@addDept');
 $this->get('cat', 'IndexController@cat');

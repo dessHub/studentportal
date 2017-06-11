@@ -75,7 +75,7 @@
 
                               <div class="col-md-9">
                                   <input id="regNo" type="text" class="form-control" name="regNo" value="{{ old('regNo') }}">
-                                  <input id="role" type="hidden" class="form-control" name="role" value="Lecturer">
+                                  <input id="role" type="hidden" class="form-control" name="role" value="Staff">
                                   <input id="course" type="hidden" class="form-control" name="course" value="NA">
                                   <input id="cat" type="hidden" class="form-control" name="cat" value="Staff">
 

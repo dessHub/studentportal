@@ -39,6 +39,47 @@ class IndexController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function lecturers()
+    {
+        $name = User::where('role','=','Staff')->get();
+        $lect = User::where('role','=','Lecturer')->get();
+        $dept = Department::get();
+        return view('lecturer')->with('staff', $name)->with('lecturers', $lect)->with('departments', $dept);
+    }
+
+    protected function roles() {
+      $rules = array(
+              'user_id' => 'required|max:100'
+          );
+
+          $validator = Validator::make(Input::all(), $rules);
+
+    // check if the validator failed -----------------------
+    if ($validator->fails()) {
+
+        // get the error messages from the validator
+        $messages = $validator->messages();
+
+        // redirect our user back to the form with the errors from the validator
+        return Redirect::to('/lecturers')
+            ->withErrors($validator);
+
+    } else {
+        // validation successful ---------------------------
+
+        // report has passed all tests!
+        // let him enter the database
+
+        // create the data for report
+         $user_obj = new User();
+         $user_obj->id = Request::input('user_id');
+         $user = User::find($user_obj->id); // Eloquent Model
+         $user->update(['role' => "Lecturer"]);
+         return redirect('/lecturers');
+         }
+
+    }
+
     public function dept()
     {
         $name = Department::get();
