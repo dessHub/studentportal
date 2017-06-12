@@ -105,6 +105,8 @@ $this->post('saveres', 'IndexController@saveRes');
 
 $this->get('viewresults', 'IndexController@viewRes');
 $this->post('viewresults', 'IndexController@loadRes');
+$this->get('sendresults', 'IndexController@sendRes');
+$this->post('sendresults', 'IndexController@sendResults');
 $this->get('myresults', 'IndexController@myres');
 $this->post('myresults', 'IndexController@myResults');
 $this->get('viewStdResults', 'IndexController@viewStdRes');

@@ -13,11 +13,11 @@
             <li><a href="{{ url('/login')}}"><span  style="color:blue;">Login</span> </a></li>
             @else
               @if (Auth::user()->role === 'Student')
-              
+
                   <li><a href="{{ url('/regunits')}}"><span  style="color:blue;">Register Units</span> </a></li>
                     <li><a href="{{ url('/myresults')}}"><span  style="color:blue;">Check Results</span></a></li>
                    <li><a href="{{ url('/viewasignments') }}"><span  style="color:blue;">Asignments</span></a></li>
-               
+
               @endif
              <li><a href="{{ url('/logout')}}"><span  style="color:blue;">Logout</span> </a></li>
             @endif

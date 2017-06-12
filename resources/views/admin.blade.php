@@ -13,16 +13,20 @@
             <li><a href="{{ url('/login')}}"><span  style="color:blue;">Login</span> </a></li>
             @else
               @if (Auth::user()->role === 'Lecturer')
+              <li><a href="{{ url('/units')}}"><span  style="color:blue;">Units</span> </a></li>
+              <li><a href="{{ url('/asignunits') }}"><span  style="color:blue;">Asign Units</span></a></li>
+              <li><a href="{{ url('/getres') }}"><span  style="color:blue;">Update Results</span></a></li>
+              <li><a href="{{ url('/asignments') }}"><span  style="color:blue;">Asignments</span></a></li>
+              <li><a href="{{ url('/test') }}"><span  style="color:blue;">Test</span></a></li>
+              <li><a href="{{ url('/sendresults') }}"><span  style="color:blue;">Dispatch Results</span></a></li>
+
+
+              @elseif (Auth::user()->role === 'Admin')
 
             <li><a href="{{ url('/lecturers')}}" ><span  style="color:blue;">Lecturers</span></a></li>
             <li><a href="{{ url('/dept')}}" ><span  style="color:blue;">Departments</span></a></li>
             <li><a href="{{ url('/courses')}}"><span  style="color:blue;">Courses</span> </a></li>
-            <li><a href="{{ url('/units')}}"><span  style="color:blue;">Units</span> </a></li>
-            <li><a href="{{ url('/asignunits') }}">Asign Units</a></li>
-            <li><a href="{{ url('/getres') }}">Update Results</a></li>
-            <li><a href="{{ url('/asignments') }}">Asignments</a></li>
-            <li><a href="{{ url('/session') }}">Session</a></li>
-            <li><a href="{{ url('/test') }}">Test</a></li>
+            <li><a href="{{ url('/session') }}"><span  style="color:blue;">Session</span></a></li>
             <li><a href="{{ url('/cat')}}"><span  style="color:blue;">Study Categories</span></a></li>
             <li><a href="{{ url('/')}}"><span  style="color:blue;">About Us</span></a></li>
                 @endif

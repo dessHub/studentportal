@@ -10,7 +10,11 @@
 
         @else
           @if (Auth::user()->role === 'Lecturer')
-            <li><a href="{{ url('/viewresults') }}">View Results</a></li>
+             <li><a href="{{ url('/viewresults') }}">View Results</a></li>
+          @elseif (Auth::user()->role === 'Admin')
+             <li><a href="{{ url('/viewresults') }}">View Results</a></li>
+              <li><a href="{{ url('/lecturers')}}" ><span  style="color:blue;">Lecturers</span></a></li>
+
           @elseif (Auth::user()->role === 'Student')
           <li><a href="{{ url('/myresults') }}">View Results</a></li>
 
@@ -22,8 +26,4 @@
   </ul>
 </div>
 <div id="search">
-  <form action="" method="">
-    <input type="text" value="Search" class="txtfield" onblur="javascript:if(this.value==''){this.value=this.defaultValue;}" onfocus="javascript:if(this.value==this.defaultValue){this.value='';}" />
-    <input type="submit" value="" class="button" />
-  </form>
 </div>

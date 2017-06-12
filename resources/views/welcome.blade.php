@@ -24,42 +24,42 @@
     <div class="">
 
 <div id="adbox">
-  <div class="body">
-    <div class="images">
-      <img src="./public/images/discussing2.jpg" alt="Img" class="" />
-      <img src="./public/images/shake-hands.jpg" alt="Img" height="144" width="230px" />
-      <img src="./public/images/professionals.jpg" alt="Img" height="135" width="230px" class="last" />
+  <div class="body row" style="margin-top:50px;">
+    <div class="col-md-8">
+      <img src="./public/images/images.jpg" alt="Img" class="thumbnail img-resposive" style="width:100%; height:200px;">
+
     </div>
-    <div class="details">
+    <div class="col-md-4">
       <p>
         <span>
           Welcome To Uber Campus Website.
         </span>
         Get the latest News about the campus.
       </p>
+      <img src="./public/images/pic.jpg" alt="Img" class="thumbnail img-resposive" style="width:100%; height:150px;">
     </div>
   </div>
   <div class="footer">
     <ul>
       <li class="selected">
-        <a href="index.html"><img src="./public/images/meeting2.jpg" alt="Img" /></a>
+        <a href="#"><img src="./public/images/pic.jpg" alt="Img" style="width:60px; height:80px;"/></a>
         <p>
-          <a href="index.html">Morbi quiseros sedquam interdum placerat</a><br/>
-          Fusce placerat tellusdiam rutrum porttitor
+          <a href="#">Career Events Day</a><br/>
+          On 10th Feb, 2017, Uber Media School hosted the Young Members Group of <a href="#">More</a>
         </p>
       </li>
       <li>
-        <a href="index.html"><img src="./public/images/flags2.jpg" alt="Img" /></a>
+        <a href="#"><img src="./public/images/pic2.jpg" alt="Img" style="width:60px; height:80px;" /></a>
         <p>
-          <a href="index.html">Ut posuere nibh in tortor</a><br/>
-          Phasellusposuere semper loremsodales orci fringilla eget.
+          <a href="#">Campus Library</a><br/>
+          Our library is rank no 3 modern library in Africa.
         </p>
       </li>
       <li>
-        <a href="index.html"><img src="./public/images/boys.jpg" alt="Img" /></a>
+        <a href="#"><img src="./public/images/pic3.jpg" alt="Img" style="width:60px; height:80px;" /></a>
         <p>
-          <a href="index.html">In sagittis lacus mollis nunc</a><br/>
-          malesuada et facilisisipsum scelerisque
+          <a href="#">School Administration Block</a><br/>
+          With its ultra-modern physical infrastructure and state-of-the-art ICT facilities.
         </p>
       </li>
     </ul>

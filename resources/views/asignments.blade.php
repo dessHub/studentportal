@@ -8,7 +8,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Units Asignment Portal</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/asignments') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/asignments') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="col-md-12">
                        <div class="col-md-1">
@@ -125,7 +125,7 @@
                             </div>
                         </div>
                       </div>
-                     <div class="col-md-9">
+                     <div class="col-md-6">
 
                       <div class="col-md-12">
                        <div class="form-group{{ $errors->has('asignment') ? ' has-error' : '' }}">
@@ -144,6 +144,25 @@
                      </div>
 
                      </div>
+                    <div class="col-md-3">
+
+                     <div class="col-md-12">
+                      <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
+                          <label for="file" class="col-md-12 control-label">Upload File:</label>
+
+                          <div class="col-md-12">
+                               <input class="form-control" type="file" name="file" required="true">
+
+                               @if ($errors->has('file'))
+                                   <span class="help-block">
+                                       <strong>{{ $errors->first('file') }}</strong>
+                                   </span>
+                               @endif
+                          </div>
+                      </div>
+                    </div>
+
+                    </div>
                       <div class="col-md-2">
                         <div class="form-group">
                             <div class="col-md-12 " style="padding-top:25px;">

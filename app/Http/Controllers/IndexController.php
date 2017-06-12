@@ -375,6 +375,7 @@ class IndexController extends Controller
     }
 
     public function postAsignment() {
+      $input = Input::all();
       $rules = array(
               'semester' => 'required|max:100',
               'session' => 'required|max:100',
@@ -405,6 +406,16 @@ class IndexController extends Controller
 
         // create the data for report
         //$count = 0;
+        $file = array_get($input,'file');
+        // SET UPLOAD PATH
+         $destinationPath = 'uploads';
+         // GET THE FILE EXTENSION
+         $extension = $file->getClientOriginalExtension();
+         // RENAME THE UPLOAD WITH RANDOM NUMBER
+         $fileName = rand(11111, 99999) . '.' . $extension;
+         // MOVE THE UPLOADED FILES TO THE DESTINATION DIRECTORY
+         $upload_success = $file->move($destinationPath, $fileName);
+
 
         $asignment = new Asignment;
         $asignment->semester     = Input::get('semester');
@@ -862,6 +873,82 @@ class IndexController extends Controller
 
     }
 
+
+    public function sendRes()
+    {
+        $name = Session::get();
+        $unit = Unit::get();
+        $course = Course::get();
+        $test = Test::get();
+        $count = Registration::get();
+        $res = Result::get();
+        return view('average')->with('sessions', $name)->with('results', $res)->with('tests', $test)->with('units', $unit)->with('courses', $course);
+    }
+
+    protected function sendResults() {
+      $rules = array(
+              'semester' => 'required|max:100',
+              'session' => 'required|max:100',
+              'year' => 'required|max:100',
+              'year_of_study' => 'required|max:100',
+              'academic_year' => 'required|max:100',
+              'course' => 'required|max:100',
+          );
+
+          $validator = Validator::make(Input::all(), $rules);
+
+    // check if the validator failed -----------------------
+    if ($validator->fails()) {
+
+        // get the error messages from the validator
+        $messages = $validator->messages();
+
+        // redirect our user back to the form with the errors from the validator
+        return Redirect::to('/sendresults')
+            ->withErrors($validator);
+
+    } else {
+        // validation successful ---------------------------
+
+        // report has passed all tests!
+        // let him enter the database
+
+        // create the data for report
+        //$count = 0;
+        $yr = Input::get('year');
+        $crs = Input::get('course');
+        $sem = Input::get('semester');
+        $acd_yr = Input::get('academic_year');
+        $yr_std = Input::get('year_of_study');
+        $sess = Input::get('session');
+        $regno = Input::get('regNo');
+        $test = Input::get('test');
+        $unit = Input::get('unit');
+
+        $name = Session::get();
+        $units = Unit::get();
+        $course = Course::get();
+        $tests = Test::get();
+        $results = Result::where('unit','=',$unit)->where('year','=',$yr)->where('session','=',$sess)->where('academic_year','=',$acd_yr)->where('course','=',$crs)->where('unit','=',$unit)->get();
+
+           foreach($results as $key){
+             $mrks = $key->marks;
+             $unt = $key->unit;
+             $tst = $key->test;
+             $text = "Your $unt $tst results are $mrks";
+             $phone = "";
+             $users = User::where('regNo','=',$key->regNo)->get();
+             foreach($users as $user){
+               $phone = $user->phoneNo;
+             }
+             SMSProvider::sendMessage($phone, $text);
+
+           }
+              return view('average')->with('sessions', $name)->with('results', $results)->with('tests', $tests)->with('units', $units)->with('courses', $course);
+
+       }
+
+    }
 
     public function viewStdRes()
     {

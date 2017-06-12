@@ -8,10 +8,10 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Select Class</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/viewresults') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/sendresults') }}">
                         {{ csrf_field() }}
                         <div class="col-md-12">
-                       <div class="col-md-4">
+                       <div class="col-md-3">
                         <div class="form-group{{ $errors->has('semester') ? ' has-error' : '' }}">
                             <label for="semester" class="col-md-12 control-label">Semester</label>
 
@@ -27,7 +27,7 @@
                         </div>
                       </div>
 
-                     <div class="col-md-4">
+                     <div class="col-md-3">
                       <div class="form-group{{ $errors->has('session') ? ' has-error' : '' }}">
                           <label for="session" class="col-md-12 control-label">Session:</label>
 
@@ -43,7 +43,7 @@
                       </div>
                     </div>
 
-                     <div class="col-md-4">
+                     <div class="col-md-3">
                       <div class="form-group{{ $errors->has('year') ? ' has-error' : '' }}">
                           <label for="year" class="col-md-12 control-label">Year:</label>
 
@@ -57,29 +57,30 @@
                           </div>
                       </div>
                     </div>
+
+                    <div class="col-md-3">
+                      <div class="form-group{{ $errors->has('academic_year') ? ' has-error' : '' }}">
+                          <label for="academic_year" class="col-md-12 control-label">Academic Year:</label>
+
+                          <div class="col-md-12">
+                               <select class="form-control" id="academic_year" name="academic_year" required="true" value="{{ old('academic_year') }}" style="background-color : inherit">
+                                   <option  value="">Select Academic Year</option>
+                                   <option  value="2017-2017">2017-2017</option>
+                                    <option  value="2016-2017">2016-2017</option>
+                                    <option  value="2016-2016">2016-2016</option>
+                                     <option  value="2015-2016">2015-2016</option>
+                                      <option  value="2015-2015">2015-2015</option>
+
+                               </select>
+                          </div>
+                      </div>
+
+                          </div>
                         </div>
 
                          <div class="col-md-12">
 
-                         <div class="col-md-3">
-                           <div class="form-group{{ $errors->has('academic_year') ? ' has-error' : '' }}">
-                               <label for="academic_year" class="col-md-12 control-label">Academic Year:</label>
-
-                               <div class="col-md-12">
-                                    <select class="form-control" id="academic_year" name="academic_year" required="true" value="{{ old('academic_year') }}" style="background-color : inherit">
-                                        <option  value="">Select Academic Year</option>
-                                        <option  value="2017-2017">2017-2017</option>
-                                         <option  value="2016-2017">2016-2017</option>
-                                         <option  value="2016-2016">2016-2016</option>
-                                          <option  value="2015-2016">2015-2016</option>
-                                           <option  value="2015-2015">2015-2015</option>
-
-                                    </select>
-                               </div>
-                           </div>
-
-                               </div>
-                           <div class="col-md-3">
+                           <div class="col-md-2">
                             <div class="form-group{{ $errors->has('year_of_study') ? ' has-error' : '' }}">
                                 <label for="year_of_study" class="col-md-12 control-label">YearOfStudy:</label>
 
@@ -113,11 +114,43 @@
                             </div>
                           </div>
 
+                           <div class="col-md-2">
+                            <div class="form-group{{ $errors->has('test') ? ' has-error' : '' }}">
+                                <label for="test" class="col-md-12 control-label">Test:</label>
+
+                                <div class="col-md-12">
+                                     <select class="form-control" id="test" name="test" required="true" value="{{ old('test') }}" style="background-color : inherit">
+                                         <option  value="">Select Test</option>
+                                         @foreach($tests as $key)
+                                         <option  value="{{$key->name}}">{{$key->name}}</option>
+                                         @endforeach
+
+                                     </select>
+                                </div>
+                            </div>
+                          </div>
+
+                           <div class="col-md-2">
+                            <div class="form-group{{ $errors->has('unit') ? ' has-error' : '' }}">
+                                <label for="unit" class="col-md-12 control-label">Unit Code:</label>
+
+                                <div class="col-md-12">
+                                     <select class="form-control" id="unit" name="unit" required="true" value="{{ old('unit') }}" style="background-color : inherit">
+                                         <option  value="">Select Unit</option>
+                                         @foreach($units as $key)
+                                         <option  value="{{$key->code}}">{{$key->code}}</option>
+                                         @endforeach
+
+                                     </select>
+                                </div>
+                            </div>
+                          </div>
+
                       <div class="col-md-2">
                         <div class="form-group">
                             <div class="col-md-12 " style="padding-top:25px;">
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-search"></i> Results
+                                    <i class="fa fa-btn fa-signout"></i> Send
                                 </button>
                             </div>
                         </div>
